@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "izyjob",
+    "slug": "izyjob",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/IzyJob.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/images/IzyJob.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "web": {
+      "favicon": "./assets/images/favicon.png"
+    },
+    "description": "",
+    "githubUrl": "https://github.com/joefreire/izyjobApp"
+  }
+}
