@@ -1,4 +1,4 @@
-import { Ionicons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons'; 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
@@ -8,6 +8,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import perfilStore from '../store';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -22,14 +23,14 @@ export default function BottomTabNavigator() {
         name="Perfil"
         component={TabOneNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIconHome name="ios-code" color={color} />,
         }}
       />
       <BottomTab.Screen
         name="Vagas"
         component={TabTwoNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIconProfile name="ios-code" color={color} />,
         }}
       />
     </BottomTab.Navigator>
@@ -38,15 +39,31 @@ export default function BottomTabNavigator() {
 
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
-function TabBarIcon(props: { name: string; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+function TabBarIconHome(props: { name: string; color: string }) {
+  return <AntDesign name="home" size={24} color="black" />;
+}
+function TabBarIconProfile(props: { name: string; color: string }) {
+  return <AntDesign name="profile" size={24} color="black" />;
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const TabOneStack = createStackNavigator<TabOneParamList>();
 
-function TabOneNavigator() {
+function TabOneNavigator({navigation}) { 
+  
+  React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', e => {
+
+      if(global.webview.startUrl != global.webview.props.source.uri){        
+        perfilStore.dispatch({ type: 'KEY' })
+        //global.webview.reload();
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <TabOneStack.Navigator>
       <TabOneStack.Screen
