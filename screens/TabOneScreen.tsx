@@ -4,11 +4,11 @@ import { StyleSheet } from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { WebView } from 'react-native-webview';
-import perfilStore from '../store';
+import store from '../store';
 
 
 export default class App extends React.Component {
-  state = perfilStore.getState();
+  state = store.getState();
 
   
   resetWebViewToInitialUrl = () => {
@@ -23,7 +23,13 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    //quando o state e alterado no redux chama a funcao que muda a key e reseta a view
+    store.subscribe(()=>{
+      let newState = store.getState();
+      if(this.state.key != newState.key){
+        this.resetWebViewToInitialUrl()
+      }      
+    })
     return <WebView 
     key={ this.state.key }
     ref={(ref) => { global.webview = ref; }}

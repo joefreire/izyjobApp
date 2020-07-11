@@ -8,7 +8,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
-import perfilStore from '../store';
+import store from '../store';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -56,7 +56,7 @@ function TabOneNavigator({navigation}) {
     const unsubscribe = navigation.addListener('tabPress', e => {
 
       if(global.webview.startUrl != global.webview.props.source.uri){        
-        perfilStore.dispatch({ type: 'KEY' })
+        store.dispatch({ type: 'KEY' })
         //global.webview.reload();
       }
     });
@@ -77,7 +77,18 @@ function TabOneNavigator({navigation}) {
 
 const TabTwoStack = createStackNavigator<TabTwoParamList>();
 
-function TabTwoNavigator() {
+function TabTwoNavigator({navigation}) {
+    React.useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', e => {
+
+      if(global.webview2.startUrl != global.webview2.props.source.uri){    
+      console.log('dsa')    
+        store.dispatch({ type: 'KEYVAGAS' })
+      }
+    });
+
+    return unsubscribe;
+  }, [navigation]);
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
