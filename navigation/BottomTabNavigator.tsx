@@ -9,6 +9,7 @@ import TabOneScreen from '../screens/TabOneScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 import store from '../store';
+import LogoImage from '../components/LogoImage';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -69,7 +70,7 @@ function TabOneNavigator({navigation}) {
       <TabOneStack.Screen
         name="Perfil"
         component={TabOneScreen}
-        options={{ headerTitle: 'IzyJob' }}
+        options={{ headerTitle: 'IzyJob', headerLeft: props => <LogoImage {...props} /> }}
       />
     </TabOneStack.Navigator>
   );
@@ -94,7 +95,7 @@ function TabTwoNavigator({navigation}) {
       <TabTwoStack.Screen
         name="Vagas"
         component={TabTwoScreen}
-        options={{ headerTitle: 'IzyJob' }}
+        options={{ headerTitle: 'IzyJob', headerLeft: props => <LogoImage {...props} /> }}
       />
     </TabTwoStack.Navigator>
   );

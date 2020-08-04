@@ -6,7 +6,6 @@ import { Text, View } from '../components/Themed';
 import { WebView } from 'react-native-webview';
 import store from '../store';
 
-
 export default class App extends React.Component {
   state = store.getState();
 
