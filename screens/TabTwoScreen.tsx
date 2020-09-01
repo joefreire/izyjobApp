@@ -24,7 +24,8 @@ export default class App extends React.Component {
     return <WebView 
     key={ this.state.keyVagas }
     ref={(ref) => { global.webview2 = ref; }}
-    source={{ uri: 'https://www.izyjob.com.br/vagas' }} 
+    source={{ uri: 'https://www.izyjob.com.br/vagas' }}
+    onMessage={(ref) => console.log('ds')} 
     style={{ marginTop: 0 }} 
     />;
   }

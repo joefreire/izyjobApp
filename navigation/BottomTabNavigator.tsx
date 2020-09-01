@@ -15,7 +15,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
+  
   return (
     <BottomTab.Navigator
       initialRouteName="Perfil"
@@ -83,7 +83,7 @@ function TabTwoNavigator({navigation}) {
     const unsubscribe = navigation.addListener('tabPress', e => {
 
       if(global.webview2.startUrl != global.webview2.props.source.uri){    
-      console.log('dsa')    
+      //console.log('dsa')    
         store.dispatch({ type: 'KEYVAGAS' })
       }
     });
@@ -91,6 +91,7 @@ function TabTwoNavigator({navigation}) {
     return unsubscribe;
   }, [navigation]);
   return (
+
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
         name="Vagas"
